@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <h2>Shops</h2>
+    {% for shop in shops %}
+        <ul>
+            <li>{{ shop.shop_name }}</li>
+            <li>{{ shop.contact }}</li>
+            <li>{{ shop.location }}</li>
+            <li>{{ shop.category }}</li>
+            <li>{{ shop.contact_person }}</li>
+            <li>{{ shop.email }}</li>
+        </ul>
+    {% endfor %}
+    <h2>Products</h2>
+    {% for product in products %}
+        <ul>
+            <li>{{ product.product_name }}</li>
+            <li>{{ product.price }}</li>
+            <li>{{ product.discount }}</li>
+            <li>{{ product.old_price }}</li>
+            <img src="/media/{{ product.image }}" width="100px" height="100px">
+        </ul>
+    {% endfor %}
+    <h2>Deals</h2>
+    {% for deal in deals %}
+        <ul>
+            <li>{{ deal.shop }}</li>
+            <li>{{ deal.deal_name }}</li>
+            <li>{{ deal.valid_from }}</li>
+            <li>{{ deal.valid_till }}</li>
+            <li>{{ deal.discount_percent }}</li>
+            <img src="/media/{{ deal.image }}" width="100px" height="100px">
+        </ul>
+    {% endfor %}
+</body>
+</html>
