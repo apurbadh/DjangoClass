@@ -1,0 +1,24 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+    
+    {% for product in products%}
+        <div class="container">
+  <div class="card">
+    <div class="card-header">
+      <img src="/media/{{ product.image }}" alt="{{ product.product_name }}" />
+    </div>
+    <div class="card-body">
+      <h4>
+        {{ product.product_name }}
+      </h4>
+      <p>
+        Rs. {{ product.price }} - ( {{ product.discount|floatformat:"0"  }} discount )<br>
+        Old price : {{ product.old_price }}
+      </p>
+  </div>
+</div>
+</div>
+  
+    {% endfor %}
+{% endblock %}
