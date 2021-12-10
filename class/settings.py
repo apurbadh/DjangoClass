@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'class.wsgi.application'
 DATABASES = {
     'default': { 
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'amazon',
+        'NAME': 'app_db',
         'USER': 'root', 
         'PASSWORD': 'alpha-vega', 
         'HOST': '127.0.0.1', 
@@ -140,3 +140,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+AUTH_USER_MODEL = "myapp.CustomUser"

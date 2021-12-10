@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class Shop(models.Model):
@@ -35,7 +35,14 @@ class Deal(models.Model):
     def __str__(self) -> str:
         return self.deal_name
     
-    
 
 
+class CustomUser(AbstractUser):
+    is_admin = models.BooleanField('admin', default=False)
+    is_shop = models.BooleanField('shop', default=False)
+    is_customer = models.BooleanField("customer", default=False)    
+
+class Student(models.Model):
+    username = models.CharField(max_length=255)
+    roll = models.IntegerField()
      

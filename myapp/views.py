@@ -1,5 +1,6 @@
-from django.shortcuts import render 
-from .models import Shop, Product, Deal
+from django.shortcuts import redirect, render 
+from .models import Shop, Product, Deal, Student
+from django.contrib import messages
 
 # Create your views here.
 def index(req):
@@ -19,3 +20,20 @@ def product_list(req):
         'products': product
     }
     return render(req, 'myapp/product_list.html', context)
+
+def product(req, roll, name):
+    print(roll)
+    print(name)
+    context = {"roll" : roll, "name" : name}
+    return render(req, "myapp/product.html", context)
+
+def form(req):
+    if req.method == "POST":
+        username = req.POST["username"]
+        roll = req.POST["roll"]
+        student = Student.objects.create(username=username, roll=roll)
+        student.save()
+        messages.success(req, "Message send sucessfully")
+        return redirect('/form');
+        
+    return render(req, "myapp/form.html")
