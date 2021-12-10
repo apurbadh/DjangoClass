@@ -37,7 +37,7 @@ class Deal(models.Model):
     
 
 
-class CustomUser(AbstractUser):
+class User_Custom(AbstractUser):
     is_admin = models.BooleanField('admin', default=False)
     is_shop = models.BooleanField('shop', default=False)
     is_customer = models.BooleanField("customer", default=False)    

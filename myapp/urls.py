@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.index),
     path('product_list', views.product_list, name="product_list"),
     path('student/<int:roll>/<str:name>', views.product),
-    path('product_form', views.form)
+    path('product_form', views.student_form, name="student_form")
 ]

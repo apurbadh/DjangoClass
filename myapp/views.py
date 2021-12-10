@@ -27,13 +27,13 @@ def product(req, roll, name):
     context = {"roll" : roll, "name" : name}
     return render(req, "myapp/product.html", context)
 
-def form(req):
+def student_form(req):
     if req.method == "POST":
         username = req.POST["username"]
         roll = req.POST["roll"]
         student = Student.objects.create(username=username, roll=roll)
         student.save()
-        messages.success(req, "Message send sucessfully")
-        return redirect('/form');
+        messages.success(req, "Student created sucessfully !")
+        return redirect('student_form');
         
     return render(req, "myapp/form.html")
