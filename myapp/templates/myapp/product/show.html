@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
+<body>
+    <img src="/media/{{ product.image }}" width="100px" height="100px">
+    <h1>{{ product.product_name }}</h1>
+    <h4>Price : {{ product.price }}</h4>
+    <h4>Old Price : {{ product.old_price }}</h4>
+    <h4>Discount : {{ product.discount }}</h4>
+    <a href="/product/{{ product.id }}/edit"><button>Edit</button></a>
+    <form method="POST" action="/product/{{ product.id }}/delete">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+    <a href="/product">Back</a>
+</body>
+</html>

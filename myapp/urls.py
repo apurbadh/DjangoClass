@@ -3,10 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('student/<int:roll>/<str:name>', views.product),
-    path('product_form', views.student_form, name="student_form"),
-    path('product', views.products, name="product"),
-    path('productshow', views.product_list, name="productshow"),
-    path('productedit/<int:id>', views.productedit, name="productedit"),
-    path('productdestory/<int:id>', views.productdestroy, name="productdestroy"),
+    path('product', views.product_list, name="products"),
+    path("product/<int:id>", views.product_show, name="product_show"),
+    path('product/create', views.product_create, name="product_create"),
+    path('product/<int:id>/edit', views.product_edit, name="product_edit"),
+    path('product/<int:id>/delete', views.product_destroy, name="product_destroy"),
 ]

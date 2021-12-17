@@ -1,9 +1,9 @@
 from django.http import request
+from django.http.response import HttpResponseForbidden
 from django.shortcuts import redirect, render 
-from .models import Shop, Product, Deal, Student
+from .models import Shop, Product, Deal
 from django.contrib import messages
-from myapp.forms import ProductForm
-
+from .forms import ProductForm
 
 # Create your views here.
 def index(req):
@@ -22,58 +22,46 @@ def product_list(req):
     context = {
         'products': product
     }
-    return render(req, 'myapp/product_list.html', context)
+    return render(req, 'myapp/product/list.html', context)
 
-def product(req, roll, name):
-    print(roll)
-    print(name)
-    context = {"roll" : roll, "name" : name}
-    return render(req, "myapp/product.html", context)
-
-def student_form(req):
-    if req.method == "POST":
-        username = req.POST["username"]
-        roll = req.POST["roll"]
-        student = Student.objects.create(username=username, roll=roll)
-        student.save()
-        messages.success(req, "Student created sucessfully !")
-        return redirect('student_form');
-        
-    return render(req, "myapp/form.html")
-
-def products(request):
+def product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Created sucessfully")
-            return redirect('/product')
+            return redirect("/product/create")
         else:
             messages.error(request, "Cannot store data")
-            return redirect("/product")
+            return redirect("/product/create")
     form = ProductForm()
-    return render(request, "myapp/product_new.html",{
+    return render(request, "myapp/product/create.html",{
         "form" : form
     } )
  
+def product_show(req, id):
+    product = Product.objects.get(id=id)
+    return render(req, "myapp/product/show.html", {"product": product})
 
-def productedit(req, id):
+def product_edit(req, id):
     if req.method == "POST":
         form = ProductForm(req.POST, req.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Created sucessfully")
-            return redirect('/productedit')
+            return redirect("/product/edit/" + str(id))
+
         else:
             messages.error(request, "Cannot store data")
-            return redirect("/productedit")
+            return redirect("/product/edit/" + str(id))
+
     product = Product.objects.get(id=id)
     form = ProductForm(instance=product)
-    return render(req, "myapp/product_edit.html", {"form" : form})
+    return render(req, "myapp/product/edit.html", {"form" : form})
 
-def productdestroy(req, id):
-   if request.method == "POST":
-       product = Product.objects.get(id=id)
-       product.delete()
-    
-   return redirect('/productshow') 
+def product_destroy(req, id):
+    if req.method == "POST":
+        product = Product.objects.get(id=id)
+        product.delete()
+        return redirect('/product')
+    return HttpResponseForbidden("GET Request NOT ALLOWED")

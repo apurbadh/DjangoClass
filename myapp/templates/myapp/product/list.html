@@ -1,7 +1,8 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
-    
+   <a href="/product/create">Create</a> 
+
     {% for product in products%}
         <div class="container">
   <div class="card">
@@ -9,13 +10,10 @@
       <img src="/media/{{ product.image }}" alt="{{ product.product_name }}" />
     </div>
     <div class="card-body">
-      <h4>
+      <h1>
         {{ product.product_name }}
-      </h4>
-      <p>
-        Rs. {{ product.price }} - ( {{ product.discount|floatformat:"0"  }} discount )<br>
-        Old price : {{ product.old_price }}
-      </p>
+      </h1>
+      <a href="/product/{{ product.id }}"><button>Show</button></a>
   </div>
 </div>
 </div>

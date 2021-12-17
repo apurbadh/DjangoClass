@@ -42,7 +42,4 @@ class User_Custom(AbstractUser):
     is_shop = models.BooleanField('shop', default=False)
     is_customer = models.BooleanField("customer", default=False)    
 
-class Student(models.Model):
-    username = models.CharField(max_length=255)
-    roll = models.IntegerField()
-     
+
